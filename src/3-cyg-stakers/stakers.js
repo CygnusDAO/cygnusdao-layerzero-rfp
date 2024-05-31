@@ -4,7 +4,7 @@ const { createObjectCsvWriter } = require("csv-writer");
 const path = require("path");
 
 const chains = require(path.resolve(__dirname, "../chains.js"));
-const abi = require(path.resolve(__dirname, "../../abis/terminal.json"));
+const abi = require(path.resolve(__dirname, "../../abis/x1vault.json"));
 
 const csvWriterConfig = createObjectCsvWriter({
   path: "cyg_stakers.csv",

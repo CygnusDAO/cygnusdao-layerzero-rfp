@@ -1,8 +1,9 @@
 const { ethers } = require("ethers");
 const { createObjectCsvWriter } = require("csv-writer");
+const path = require("path");
 
-const chains = require("../chains.js");
-const abi = require("../../abis/terminal.json");
+const chains = require(path.resolve(__dirname, "../chains.js"));
+const abi = require(path.resolve(__dirname, "../../abis/terminal.json"));
 
 // Create the .csv file to store depositors
 const csvWriterConfig = createObjectCsvWriter({

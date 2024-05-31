@@ -1,4 +1,5 @@
-require("dotenv").config({ path: "../../.env" });
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 const polygon = {
   rpcUrl: process.env.POLYGON_RPC,
@@ -73,7 +74,7 @@ const zkevm = {
 const chains = {
   polygon,
   arbitrum,
-  zkevm
+  zkevm,
 };
 
 module.exports = chains;

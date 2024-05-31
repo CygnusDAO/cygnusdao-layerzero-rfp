@@ -1,15 +1,17 @@
 const { ethers } = require("ethers");
 const { createObjectCsvWriter } = require("csv-writer");
 
-const chains = require("../chains.js");
-const abi = require("../../abis/terminal.json");
+const path = require("path");
+
+const chains = require(path.resolve(__dirname, "../chains.js"));
+const abi = require(path.resolve(__dirname, "../../abis/terminal.json"));
 
 // Create the .csv file to store depositors
 const csvWriterConfig = createObjectCsvWriter({
   path: "lp_depositors.csv",
   header: [
     { id: "chain", title: "CHAIN" },
-    { id: "sender", title: "SENDER" },
+    { id: "recipient", title: "RECIPIENT" },
     { id: "assets", title: "ASSETS" },
     { id: "lp_usd", title: "LP ($USD)" },
   ],
@@ -46,7 +48,7 @@ async function getLPDepositors(chain, rpc, startBlock, collaterals) {
 
       const records = events.map((event) => ({
         chain,
-        sender: event.args.sender,
+        recipient: event.args.recipient,
         assets: ethers.utils.formatUnits(event.args.assets, 18), // LPs are always in 18 decimals
         lp_usd: ethers.utils.formatUnits(
           getLPInUsd(lpPrice, event.args.assets),
